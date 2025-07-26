@@ -19,6 +19,23 @@ import {
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 
+// This is a placeholder. In a real app, you'd fetch this from your backend.
+const codingQuestions = [
+  'Two Sum',
+  'Reverse a Linked List',
+  'Valid Palindrome',
+  'Binary Tree Inorder Traversal',
+  'Kth Smallest Element in a BST',
+];
+
+const lldQuestions = [
+  'Design a Parking Lot',
+  'Design a Vending Machine',
+  'Design a Library Management System',
+  'Design a Chess Game',
+  'Design a URL Shortener',
+];
+
 interface FeatureCardProps {
   title: string;
   description: string;
@@ -114,8 +131,67 @@ export default function LandingPage() {
         description="Your all-in-one platform for mastering software engineering skills, from algorithms to system design."
       />
 
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <Card>
+          <CardHeader>
+            <CardTitle>Top Coding Questions</CardTitle>
+            <CardDescription>
+              Sharpen your algorithm and data structure skills.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2">
+              {codingQuestions.map((q) => (
+                <li key={q}>
+                  <Link
+                    href={`/code-editor?question=${encodeURIComponent(q)}`}
+                    className="flex items-center text-muted-foreground hover:text-primary transition-colors p-2 rounded-md hover:bg-muted/50"
+                  >
+                    <ArrowRight className="mr-2 h-4 w-4 text-primary/70" />
+                    {q}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+          <CardFooter>
+            <Button variant="outline" className="w-full" asChild>
+              <Link href="/coding-questions">View All Coding Questions</Link>
+            </Button>
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Top LLD Questions</CardTitle>
+            <CardDescription>
+              Practice your low-level system design knowledge.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2">
+              {lldQuestions.map((q) => (
+                <li key={q}>
+                  <Link
+                    href={`/code-analyzer?question=${encodeURIComponent(q)}`}
+                    className="flex items-center text-muted-foreground hover:text-primary transition-colors p-2 rounded-md hover:bg-muted/50"
+                  >
+                    <ArrowRight className="mr-2 h-4 w-4 text-primary/70" />
+                    {q}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+          <CardFooter>
+            <Button variant="outline" className="w-full" asChild>
+              <Link href="/lld-questions">View All LLD Questions</Link>
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+
       <section>
-        <h2 className="text-2xl font-bold font-headline mb-6">
+        <h2 className="text-2xl font-bold font-headline mb-6 text-center">
           Explore Our Features
         </h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -126,23 +202,6 @@ export default function LandingPage() {
               icon={icons[index]}
             />
           ))}
-        </div>
-      </section>
-
-      <section className="text-center">
-        <h2 className="text-2xl font-bold font-headline mb-4">
-          Ready to Start Your Journey?
-        </h2>
-        <p className="text-muted-foreground mb-6">
-          Pick a challenge and dive into our interactive learning environment.
-        </p>
-        <div className="flex justify-center gap-4">
-          <Button size="lg" asChild>
-            <Link href="/coding-questions">Practice Coding</Link>
-          </Button>
-          <Button size="lg" variant="outline" asChild>
-            <Link href="/lld-questions">Practice LLD</Link>
-          </Button>
         </div>
       </section>
     </div>
