@@ -1,121 +1,150 @@
 import { PageHeader } from '@/components/layout/page-header';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, View } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  ArrowRight,
+  BrainCircuit,
+  Code,
+  FlaskConical,
+  GitGraph,
+  Target,
+} from 'lucide-react';
 import Link from 'next/link';
+import type { FC, ReactNode } from 'react';
 
-const codingQuestions = [
-  'Two Sum',
-  'Reverse a Linked List',
-  'Valid Palindrome',
-  'Binary Tree Inorder Traversal',
-  'Kth Smallest Element in a BST',
+interface FeatureCardProps {
+  title: string;
+  description: string;
+  icon: ReactNode;
+  href: string;
+  cta: string;
+}
+
+const FeatureCard: FC<FeatureCardProps> = ({
+  title,
+  description,
+  icon,
+  href,
+  cta,
+}) => (
+  <Card className="flex flex-col">
+    <CardHeader className="flex-row items-center gap-4">
+      <div className="bg-primary/10 p-3 rounded-lg">{icon}</div>
+      <CardTitle className="font-headline">{title}</CardTitle>
+    </CardHeader>
+    <CardContent className="flex-grow">
+      <CardDescription>{description}</CardDescription>
+    </CardContent>
+    <CardFooter>
+      <Button asChild className="w-full">
+        <Link href={href}>
+          {cta} <ArrowRight className="ml-2 h-4 w-4" />
+        </Link>
+      </Button>
+    </CardFooter>
+  </Card>
+);
+
+const features: Omit<FeatureCardProps, 'icon'>[] = [
+  {
+    title: 'Personalized Learning Journey',
+    description:
+      'Visualize your progress and navigate through a customized knowledge graph tailored to your learning goals, from fundamentals to advanced topics.',
+    href: '/journey',
+    cta: 'View Your Journey',
+  },
+  {
+    title: 'Interactive Code Editor',
+    description:
+      'Sharpen your coding skills by solving a wide range of algorithmic challenges in a feature-rich, interactive development environment.',
+    href: '/code-editor',
+    cta: 'Start Coding',
+  },
+  {
+    title: 'AI-Powered Code Analyzer',
+    description:
+      'Receive instant, intelligent feedback on your low-level design solutions. Improve code quality, efficiency, and architectural patterns.',
+    href: '/code-analyzer',
+    cta: 'Analyze Code',
+  },
+  {
+    title: 'Comprehensive Question Banks',
+    description:
+      'Access an extensive library of coding problems and low-level design scenarios, filterable by topic and difficulty to match your skill level.',
+    href: '/coding-questions',
+    cta: 'Browse Questions',
+  },
+  {
+    title: 'Goal Setting & Tracking',
+    description:
+      'Define your career ambitions, from interview prep to full-stack mastery. Let AdaptiveLearn create a personalized roadmap for your success.',
+    href: '/overview',
+    cta: 'Set Your Goals',
+  },
+  {
+    title: 'Cognitive Assessments',
+    description:
+      'Identify your cognitive strengths and weaknesses through a series of targeted assessments designed to help you learn more effectively.',
+    href: '/overview',
+    cta: 'Take an Assessment',
+  },
 ];
 
-const lldQuestions = [
-  'Design a Parking Lot',
-  'Design a Vending Machine',
-  'Design a Library Management System',
-  'Design a Chess Game',
-  'Design a URL Shortener',
+const icons = [
+  <GitGraph key="journey" className="h-6 w-6 text-primary" />,
+  <Code key="editor" className="h-6 w-6 text-primary" />,
+  <FlaskConical key="analyzer" className="h-6 w-6 text-primary" />,
+  <BrainCircuit key="questions" className="h-6 w-6 text-primary" />,
+  <Target key="goals" className="h-6 w-6 text-primary" />,
+  <BrainCircuit key="assessments" className="h-6 w-6 text-primary" />,
 ];
 
 export default function LandingPage() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       <PageHeader
         title="Welcome to AdaptiveLearn"
-        description="Your personalized learning platform for mastering coding and system design."
+        description="Your all-in-one platform for mastering software engineering skills, from algorithms to system design."
       />
 
-      <div className="grid gap-8 md:grid-cols-2">
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold font-headline">
-            Practice Problems
-          </h2>
-          <Card className="flex flex-col">
-            <CardHeader>
-              <CardTitle>Coding Questions</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <ul className="space-y-2">
-                {codingQuestions.map((q) => (
-                  <li key={q}>
-                    <Link
-                      href={`/code-editor?question=${encodeURIComponent(q)}`}
-                      className="flex items-center text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <ArrowRight className="mr-2 h-4 w-4 text-primary/70" />
-                      <span>{q}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-            <CardFooter>
-              <Button variant="link" asChild className="p-0 h-auto">
-                <Link href="/coding-questions">
-                  View all questions <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
-          <Card className="flex flex-col">
-            <CardHeader>
-              <CardTitle>Low-Level Design (LLD)</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <ul className="space-y-2">
-                {lldQuestions.map((q) => (
-                  <li key={q}>
-                    <Link
-                      href={`/code-analyzer?question=${encodeURIComponent(q)}`}
-                      className="flex items-center text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <ArrowRight className="mr-2 h-4 w-4 text-primary/70" />
-                      <span>{q}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-            <CardFooter>
-              <Button variant="link" asChild className="p-0 h-auto">
-                <Link href="/lld-questions">
-                  View all questions <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
+      <section>
+        <h2 className="text-2xl font-bold font-headline mb-6">
+          Explore Our Features
+        </h2>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, index) => (
+            <FeatureCard
+              key={feature.title}
+              {...feature}
+              icon={icons[index]}
+            />
+          ))}
         </div>
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold font-headline">Get Started</h2>
-          <Card className="flex flex-col items-center justify-center p-8 text-center">
-            <h3 className="text-xl font-semibold mb-2">Code Editor</h3>
-            <p className="mb-4 text-muted-foreground">
-              Solve challenges and hone your coding skills in our interactive
-              environment.
-            </p>
-            <Button asChild>
-              <Link href="/code-editor">
-                Go to Editor <ArrowRight className="ml-2" />
-              </Link>
-            </Button>
-          </Card>
-          <Card className="flex flex-col items-center justify-center p-8 text-center">
-            <h3 className="text-xl font-semibold mb-2">Code Analyzer</h3>
-            <p className="mb-4 text-muted-foreground">
-              Get instant feedback on code quality, efficiency, and potential
-              issues.
-            </p>
-            <Button asChild>
-              <Link href="/code-analyzer">
-                Go to Analyzer <ArrowRight className="ml-2" />
-              </Link>
-            </Button>
-          </Card>
+      </section>
+
+      <section className="text-center">
+        <h2 className="text-2xl font-bold font-headline mb-4">
+          Ready to Start Your Journey?
+        </h2>
+        <p className="text-muted-foreground mb-6">
+          Pick a challenge and dive into our interactive learning environment.
+        </p>
+        <div className="flex justify-center gap-4">
+          <Button size="lg" asChild>
+            <Link href="/coding-questions">Practice Coding</Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="/lld-questions">Practice LLD</Link>
+          </Button>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
