@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import MonacoEditor from '@monaco-editor/react';
 import { PageHeader } from '@/components/layout/page-header';
 import {
   Card,
@@ -10,7 +11,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -18,7 +18,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Play, Upload } from 'lucide-react';
+import { Bot, Play, Send, Upload } from 'lucide-react';
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable';
+import { Input } from '@/components/ui/input';
 
 const languages = [
   { value: 'javascript', label: 'JavaScript' },
@@ -109,96 +115,133 @@ export default function CodeEditorPage() {
   };
 
   return (
-    <div className="flex h-full flex-col space-y-8">
+    <div className="flex h-[calc(100vh-4rem)] flex-col space-y-4">
       <PageHeader
         title="Interactive Code Editor"
         description="Solve challenges and hone your coding skills."
       />
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        <Card>
-          <CardHeader>
-            <CardTitle className="font-headline">Problem: Two Sum</CardTitle>
-            <CardDescription>
-              Given an array of integers `nums` and an integer `target`, return
-              indices of the two numbers such that they add up to `target`. You
-              may assume that each input would have exactly one solution, and you
-              may not use the same element twice.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="font-mono text-sm bg-muted p-4 rounded-md">
-              <strong>Example 1:</strong>
-              <br />
-              Input: nums = [2,7,11,15], target = 9
-              <br />
-              Output: [0,1]
-              <br />
-              Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
-            </p>
-          </CardContent>
-        </Card>
-
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between">
-            <Select value={language} onValueChange={handleLanguageChange}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select Language" />
-              </SelectTrigger>
-              <SelectContent>
-                {languages.map((lang) => (
-                  <SelectItem key={lang.value} value={lang.value}>
-                    {lang.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <div className="flex items-center gap-2">
-              <Button variant="outline">
-                <Play className="mr-2 h-4 w-4" /> Run Code
-              </Button>
-              <Button>
-                <Upload className="mr-2 h-4 w-4" /> Submit
-              </Button>
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="flex-1 rounded-lg border"
+      >
+        <ResizablePanel defaultSize={33}>
+          <div className="flex h-full flex-col p-4">
+            <Card className="flex-1">
+              <CardHeader>
+                <CardTitle className="font-headline">Problem: Two Sum</CardTitle>
+                <CardDescription>
+                  Given an array of integers `nums` and an integer `target`,
+                  return indices of the two numbers such that they add up to
+                  `target`. You may assume that each input would have exactly
+                  one solution, and you may not use the same element twice.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="font-mono text-sm bg-muted p-4 rounded-md">
+                  <strong>Example 1:</strong>
+                  <br />
+                  Input: nums = [2,7,11,15], target = 9
+                  <br />
+                  Output: [0,1]
+                  <br />
+                  Explanation: Because nums[0] + nums[1] == 9, we return [0,
+                  1].
+                </p>
+              </CardContent>
+            </Card>
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base font-headline">
+                    Output 1
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <pre className="text-sm text-muted-foreground font-mono">
+                    Run your code to see output.
+                  </pre>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base font-headline">
+                    Output 2
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <pre className="text-sm text-muted-foreground font-mono">
+                    Run your code to see output.
+                  </pre>
+                </CardContent>
+              </Card>
             </div>
           </div>
-          <Card>
-            <CardContent className="p-0">
-              <Textarea
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                placeholder="Write your code here..."
-                className="font-mono h-[400px] border-0 rounded-md focus-visible:ring-0 focus-visible:ring-offset-0"
-              />
-            </CardContent>
-          </Card>
-          <div className="grid grid-cols-2 gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base font-headline">
-                  Output 1
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <pre className="text-sm text-muted-foreground font-mono">
-                  Run your code to see output.
-                </pre>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base font-headline">
-                  Output 2
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <pre className="text-sm text-muted-foreground font-mono">
-                  Run your code to see output.
-                </pre>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize={67}>
+          <ResizablePanelGroup direction="vertical">
+            <ResizablePanel defaultSize={70}>
+              <div className="flex h-full flex-col">
+                <div className="flex items-center justify-between p-2 border-b">
+                  <Select
+                    value={language}
+                    onValueChange={handleLanguageChange}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Select Language" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {languages.map((lang) => (
+                        <SelectItem key={lang.value} value={lang.value}>
+                          {lang.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline">
+                      <Play className="mr-2 h-4 w-4" /> Run Code
+                    </Button>
+                    <Button>
+                      <Upload className="mr-2 h-4 w-4" /> Submit
+                    </Button>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <MonacoEditor
+                    height="100%"
+                    language={language}
+                    theme="vs-dark"
+                    value={code}
+                    onChange={(value) => setCode(value || '')}
+                    options={{ minimap: { enabled: false }, fontSize: 14 }}
+                  />
+                </div>
+              </div>
+            </ResizablePanel>
+            <ResizableHandle withHandle />
+            <ResizablePanel defaultSize={30} minSize={20}>
+              <div className="h-full flex flex-col p-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Bot />
+                  <h3 className="text-lg font-semibold font-headline">AI Assistant</h3>
+                </div>
+                <div className="flex-1 space-y-4 overflow-y-auto rounded-md bg-muted/50 p-4">
+                  <div className="text-sm text-muted-foreground">
+                    Ask the assistant for help or hints.
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center gap-2">
+                  <Input placeholder="Ask a follow-up question..." />
+                  <Button variant="ghost" size="icon">
+                    <Send />
+                  </Button>
+                </div>
+              </div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
 }
