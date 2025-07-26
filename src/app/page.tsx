@@ -1,7 +1,7 @@
 import { PageHeader } from '@/components/layout/page-header';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowRight, View } from 'lucide-react';
 import Link from 'next/link';
 
 const codingQuestions = [
@@ -33,11 +33,11 @@ export default function LandingPage() {
           <h2 className="text-2xl font-bold font-headline">
             Practice Problems
           </h2>
-          <Card>
+          <Card className="flex flex-col">
             <CardHeader>
               <CardTitle>Coding Questions</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-grow">
               <ul className="space-y-2">
                 {codingQuestions.map((q) => (
                   <li key={q}>
@@ -52,12 +52,19 @@ export default function LandingPage() {
                 ))}
               </ul>
             </CardContent>
+            <CardFooter>
+              <Button variant="link" asChild className="p-0 h-auto">
+                <Link href="/coding-questions">
+                  View all questions <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </CardFooter>
           </Card>
-          <Card>
+          <Card className="flex flex-col">
             <CardHeader>
               <CardTitle>Low-Level Design (LLD)</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-grow">
               <ul className="space-y-2">
                 {lldQuestions.map((q) => (
                   <li key={q}>
@@ -72,6 +79,13 @@ export default function LandingPage() {
                 ))}
               </ul>
             </CardContent>
+            <CardFooter>
+              <Button variant="link" asChild className="p-0 h-auto">
+                <Link href="/lld-questions">
+                  View all questions <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </CardFooter>
           </Card>
         </div>
         <div className="space-y-4">
