@@ -1,59 +1,96 @@
 import { PageHeader } from '@/components/layout/page-header';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Activity, Clock, Target } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
-export default function DashboardPage() {
+const codingQuestions = [
+  'Two Sum',
+  'Reverse a Linked List',
+  'Valid Palindrome',
+  'Binary Tree Inorder Traversal',
+  'Kth Smallest Element in a BST',
+];
+
+const lldQuestions = [
+  'Design a Parking Lot',
+  'Design a Vending Machine',
+  'Design a Library Management System',
+  'Design a Chess Game',
+  'Design a URL Shortener',
+];
+
+export default function LandingPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="Dashboard"
-        description="Welcome back! Here's your personalized learning overview."
+        title="Welcome to AdaptiveLearn"
+        description="Your personalized learning platform for mastering coding and system design."
       />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Current Goal</CardTitle>
-            <Target className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-headline">
-              Full-Stack Mastery
-            </div>
-            <p className="text-xs text-muted-foreground">75% complete</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Time Spent This Week
-            </CardTitle>
-            <Clock className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-headline">8h 45m</div>
-            <p className="text-xs text-muted-foreground">
-              +12% from last week
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold font-headline">
+            Practice Problems
+          </h2>
+          <Card>
+            <CardHeader>
+              <CardTitle>Coding Questions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-muted-foreground">
+                {codingQuestions.map((q) => (
+                  <li key={q} className="flex items-center">
+                    <ArrowRight className="mr-2 h-4 w-4 text-primary" />
+                    {q}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Low-Level Design (LLD)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-muted-foreground">
+                {lldQuestions.map((q) => (
+                  <li key={q} className="flex items-center">
+                    <ArrowRight className="mr-2 h-4 w-4 text-primary" />
+                    {q}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold font-headline">Get Started</h2>
+          <Card className="flex flex-col items-center justify-center p-8 text-center">
+            <h3 className="text-xl font-semibold mb-2">Code Editor</h3>
+            <p className="mb-4 text-muted-foreground">
+              Solve challenges and hone your coding skills in our interactive
+              environment.
             </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Cognitive Score</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-headline">8.2 / 10</div>
-            <p className="text-xs text-muted-foreground">
-              Focus Sustainability: 9.1
+            <Button asChild>
+              <Link href="/code-editor">
+                Go to Editor <ArrowRight className="ml-2" />
+              </Link>
+            </Button>
+          </Card>
+          <Card className="flex flex-col items-center justify-center p-8 text-center">
+            <h3 className="text-xl font-semibold mb-2">Code Analyzer</h3>
+            <p className="mb-4 text-muted-foreground">
+              Get instant feedback on code quality, efficiency, and potential
+              issues.
             </p>
-          </CardContent>
-        </Card>
+            <Button asChild>
+              <Link href="/code-analyzer">
+                Go to Analyzer <ArrowRight className="ml-2" />
+              </Link>
+            </Button>
+          </Card>
+        </div>
       </div>
     </div>
   );

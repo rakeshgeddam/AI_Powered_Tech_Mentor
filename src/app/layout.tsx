@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/layout/app-sidebar';
+import { AppHeader } from '@/components/layout/app-header';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 
@@ -30,14 +29,14 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('font-body antialiased')}>
-        <SidebarProvider>
-          <div className="flex min-h-screen">
-            <AppSidebar />
-            <SidebarInset className="flex-1">
-              <div className="p-4 sm:p-6 lg:p-8">{children}</div>
-            </SidebarInset>
-          </div>
-        </SidebarProvider>
+        <div className="flex min-h-screen flex-col">
+          <AppHeader />
+          <main className="flex-1">
+            <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+              {children}
+            </div>
+          </main>
+        </div>
         <Toaster />
       </body>
     </html>
