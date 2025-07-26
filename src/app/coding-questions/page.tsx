@@ -6,6 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -25,6 +32,16 @@ const allCodingQuestions = [
   'Group Anagrams',
 ];
 
+const topics = [
+  'All',
+  'Arrays',
+  'Linked List',
+  'Trees',
+  'Graphs',
+  'Dynamic Programming',
+];
+const difficulties = ['All', 'Easy', 'Medium', 'Hard'];
+
 export default function AllCodingQuestionsPage() {
   return (
     <div className="space-y-8">
@@ -34,10 +51,40 @@ export default function AllCodingQuestionsPage() {
       />
       <Card>
         <CardHeader>
-          <CardTitle>Coding Challenges</CardTitle>
-          <CardDescription>
-            Select a problem to start solving.
-          </CardDescription>
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+            <div>
+              <CardTitle>Coding Challenges</CardTitle>
+              <CardDescription className="mt-1">
+                Select a problem to start solving.
+              </CardDescription>
+            </div>
+            <div className="flex gap-2">
+              <Select defaultValue="All">
+                <SelectTrigger className="w-[160px]">
+                  <SelectValue placeholder="Topic" />
+                </SelectTrigger>
+                <SelectContent>
+                  {topics.map((topic) => (
+                    <SelectItem key={topic} value={topic}>
+                      {topic}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select defaultValue="All">
+                <SelectTrigger className="w-[160px]">
+                  <SelectValue placeholder="Difficulty" />
+                </SelectTrigger>
+                <SelectContent>
+                  {difficulties.map((level) => (
+                    <SelectItem key={level} value={level}>
+                      {level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
