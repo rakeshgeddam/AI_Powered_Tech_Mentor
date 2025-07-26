@@ -38,11 +38,16 @@ export default function LandingPage() {
               <CardTitle>Coding Questions</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2 text-muted-foreground">
+              <ul className="space-y-2">
                 {codingQuestions.map((q) => (
-                  <li key={q} className="flex items-center">
-                    <ArrowRight className="mr-2 h-4 w-4 text-primary" />
-                    {q}
+                  <li key={q}>
+                    <Link
+                      href={`/code-editor?question=${encodeURIComponent(q)}`}
+                      className="flex items-center text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      <ArrowRight className="mr-2 h-4 w-4 text-primary/70" />
+                      <span>{q}</span>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -53,11 +58,16 @@ export default function LandingPage() {
               <CardTitle>Low-Level Design (LLD)</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2 text-muted-foreground">
+              <ul className="space-y-2">
                 {lldQuestions.map((q) => (
-                  <li key={q} className="flex items-center">
-                    <ArrowRight className="mr-2 h-4 w-4 text-primary" />
-                    {q}
+                  <li key={q}>
+                    <Link
+                      href={`/code-analyzer?question=${encodeURIComponent(q)}`}
+                      className="flex items-center text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      <ArrowRight className="mr-2 h-4 w-4 text-primary/70" />
+                      <span>{q}</span>
+                    </Link>
                   </li>
                 ))}
               </ul>
