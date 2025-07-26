@@ -1,7 +1,5 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { analyzeCodeAction } from './actions';
 import { PageHeader } from '@/components/layout/page-header';
 import {
   Card,
@@ -19,8 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { FlaskConical, Loader2 } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { FlaskConical } from 'lucide-react';
 
 const languages = [
   { value: 'javascript', label: 'JavaScript' },
@@ -30,29 +27,7 @@ const languages = [
   { value: 'go', label: 'Go' },
 ];
 
-const initialState = {
-  analysis: undefined,
-  suggestions: undefined,
-  error: undefined,
-};
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending} className="w-full">
-      {pending ? (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      ) : (
-        <FlaskConical className="mr-2 h-4 w-4" />
-      )}
-      Analyze Code
-    </Button>
-  );
-}
-
 export default function CodeAnalyzerPage() {
-  const [state, formAction] = useFormState(analyzeCodeAction, initialState);
-
   return (
     <div className="space-y-8">
       <PageHeader
@@ -60,10 +35,7 @@ export default function CodeAnalyzerPage() {
         description="Get instant feedback on code quality, efficiency, and potential issues."
       />
 
-      <form
-        action={formAction}
-        className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-4">
           <Card>
             <CardHeader>
@@ -93,55 +65,24 @@ export default function CodeAnalyzerPage() {
               />
             </CardContent>
           </Card>
-          <SubmitButton />
+          <Button disabled className="w-full">
+            <FlaskConical className="mr-2 h-4 w-4" />
+            Analyze Code
+          </Button>
         </div>
 
         <div className="space-y-4">
-          {state.error && (
-            <Alert variant="destructive">
-              <AlertTitle>Analysis Error</AlertTitle>
-              <AlertDescription>{state.error}</AlertDescription>
-            </Alert>
-          )}
-
-          {!state.analysis && !state.error && (
-            <Card className="flex flex-col items-center justify-center h-full min-h-[200px] border-dashed">
-              <CardContent className="text-center text-muted-foreground p-6">
-                <FlaskConical className="h-12 w-12 mx-auto mb-4" />
-                <p>Your AI-powered analysis will appear here.</p>
-              </CardContent>
-            </Card>
-          )}
-
-          {state.analysis && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="font-headline">Code Analysis</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-                  {state.analysis}
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {state.suggestions && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="font-headline">
-                  Improvement Suggestions
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-                  {state.suggestions}
-                </div>
-              </CardContent>
-            </Card>
-          )}
+          <Card className="flex flex-col items-center justify-center h-full min-h-[200px] border-dashed">
+            <CardContent className="text-center text-muted-foreground p-6">
+              <FlaskConical className="h-12 w-12 mx-auto mb-4" />
+              <p>Your AI-powered analysis will appear here.</p>
+              <p className="text-sm">
+                You can now integrate your own Hugging Face API logic.
+              </p>
+            </CardContent>
+          </Card>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { StudyGuideGenerator } from '@/components/dashboard/study-guide-generator';
 import { Activity, Clock, Target } from 'lucide-react';
 
 export default function DashboardPage() {
@@ -56,8 +55,6 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-
-      <StudyGuideGenerator />
     </div>
   );
 }
