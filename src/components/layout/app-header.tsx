@@ -20,6 +20,7 @@ import {
   SheetClose,
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '../theme-toggle';
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
@@ -96,6 +97,7 @@ export function AppHeader() {
         <nav className="hidden items-center space-x-1 md:flex">{navLinks}</nav>
 
         <div className="flex flex-1 items-center justify-end space-x-4">
+           <ThemeToggle />
           {/* Mobile Navigation */}
           <div className="md:hidden">
             <Sheet>
