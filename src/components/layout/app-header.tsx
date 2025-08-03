@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Link from 'next/link';
@@ -11,6 +12,7 @@ import {
   Home,
   Menu,
   Target,
+  BookOpen,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,6 +28,7 @@ const navItems = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/overview', label: 'Overview', icon: Target },
   { href: '/journey', label: 'Journey', icon: GitGraph },
+  { href: '/learning-hub', label: 'Learning Hub', icon: BookOpen },
   { href: '/code-editor', label: 'Code Editor', icon: Code },
   { href: '/code-analyzer', label: 'Code Analyzer', icon: FlaskConical },
 ];
