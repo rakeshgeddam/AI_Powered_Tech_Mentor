@@ -34,34 +34,31 @@ export function AppHeader() {
   const pathname = usePathname();
 
   const navLinks = navItems.map((item) => (
-    <Link key={item.href} href={item.href} legacyBehavior passHref>
+    <Button
+      key={item.href}
+      asChild
+      variant={pathname === item.href ? 'secondary' : 'ghost'}
+      className="justify-start"
+    >
+      <Link href={item.href} className="flex items-center gap-2">
+        <item.icon className="h-5 w-5" />
+        <span>{item.label}</span>
+      </Link>
+    </Button>
+  ));
+
+  const mobileNavLinks = navItems.map((item) => (
+    <SheetClose asChild key={item.href}>
       <Button
         asChild
         variant={pathname === item.href ? 'secondary' : 'ghost'}
         className="justify-start"
       >
-        <a className="flex items-center gap-2">
+        <Link href={item.href} className="flex items-center gap-2">
           <item.icon className="h-5 w-5" />
           <span>{item.label}</span>
-        </a>
+        </Link>
       </Button>
-    </Link>
-  ));
-
-  const mobileNavLinks = navItems.map((item) => (
-    <SheetClose asChild key={item.href}>
-      <Link href={item.href} legacyBehavior passHref>
-        <Button
-          asChild
-          variant={pathname === item.href ? 'secondary' : 'ghost'}
-          className="justify-start"
-        >
-          <a className="flex items-center gap-2">
-            <item.icon className="h-5 w-5" />
-            <span>{item.label}</span>
-          </a>
-        </Button>
-      </Link>
     </SheetClose>
   ));
 
