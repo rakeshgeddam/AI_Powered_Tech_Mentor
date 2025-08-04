@@ -103,49 +103,30 @@ export default function LandingPage() {
   return (
     <div className="space-y-20">
       {/* Hero Section */}
-      <section className="relative -mx-8 -mt-8">
-        <div className="absolute inset-0 bg-secondary/30 bg-gradient-to-b from-secondary/50 to-background z-0">
-           <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-background to-transparent" />
-        </div>
-        <div
-          className="absolute inset-0 z-[-1] overflow-hidden"
-          style={{
-            clipPath: 'ellipse(150% 80% at 50% 100%)',
-          }}
-        >
-          <div className="absolute inset-0 bg-secondary" />
-        </div>
-        <div className="container mx-auto px-4 pt-24 pb-20 sm:pt-32 sm:pb-28">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 text-center md:text-left">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary font-headline tracking-tight">
-                Unlock Your Potential.
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto md:mx-0">
-                Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges.
-              </p>
-              <div className="flex gap-4 justify-center md:justify-start">
-                <Button asChild size="lg" className="text-lg">
-                  <Link href="/overview">Start Learning Now</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="text-lg">
-                  <Link href="/journey">Explore Features</Link>
-                </Button>
-              </div>
-            </div>
-            <div className="relative flex justify-center">
-              <div className="w-80 h-80 sm:w-96 sm:h-96 rounded-full overflow-hidden shadow-2xl bg-background/50 backdrop-blur-sm">
-                <Image
-                  src="https://placehold.co/600x600.png"
-                  alt="Students learning with joy"
-                  data-ai-hint="students learning joy"
-                  width={600}
-                  height={600}
-                  className="object-cover w-full h-full"
-                  priority
-                />
-              </div>
-            </div>
+      <section className="relative -mx-8 -mt-8 h-[600px] flex items-center justify-center text-center">
+        <Image
+          src="https://storage.googleapis.com/res-block-studio/images/prompts/89a50893-272e-4e4b-8422-3861c8f18731.png"
+          alt="Students learning with joy"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10 z-10" />
+        <div className="relative z-20 space-y-6 px-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-headline tracking-tight drop-shadow-lg">
+            Unlock Your Potential.
+          </h1>
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md">
+            Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges.
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Button asChild size="lg" className="text-lg">
+              <Link href="/overview">Start Learning Now</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="text-lg bg-white/10 backdrop-blur-sm border-white/50 text-white hover:bg-white/20 hover:text-white">
+              <Link href="/journey">Explore Features</Link>
+            </Button>
           </div>
         </div>
       </section>
