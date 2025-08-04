@@ -1,3 +1,6 @@
+
+'use client';
+
 import { PageHeader } from '@/components/layout/page-header';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,15 +12,23 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import {
   ArrowRight,
   BrainCircuit,
   Code,
   FlaskConical,
   GitGraph,
-  Target,
 } from 'lucide-react';
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
+import Autoplay from 'embla-carousel-autoplay';
+import * as React from 'react';
 
 // This is a placeholder. In a real app, you'd fetch this from your backend.
 const codingQuestions = [
@@ -51,7 +62,7 @@ const FeatureCard: FC<FeatureCardProps> = ({
   href,
   cta,
 }) => (
-  <Card className="flex flex-col">
+  <Card className="flex flex-col h-full">
     <CardHeader className="flex-row items-center gap-4">
       <div className="bg-primary/10 p-3 rounded-lg">{icon}</div>
       <CardTitle className="font-headline">{title}</CardTitle>
@@ -91,39 +102,19 @@ const features: Omit<FeatureCardProps, 'icon'>[] = [
     href: '/code-analyzer',
     cta: 'Analyze Code',
   },
-  {
-    title: 'Comprehensive Question Banks',
-    description:
-      'Access an extensive library of coding problems and low-level design scenarios, filterable by topic and difficulty to match your skill level.',
-    href: '/coding-questions',
-    cta: 'Browse Questions',
-  },
-  {
-    title: 'Goal Setting & Tracking',
-    description:
-      'Define your career ambitions, from interview prep to full-stack mastery. Let AdaptiveLearn create a personalized roadmap for your success.',
-    href: '/overview',
-    cta: 'Set Your Goals',
-  },
-  {
-    title: 'Cognitive Assessments',
-    description:
-      'Identify your cognitive strengths and weaknesses through a series of targeted assessments designed to help you learn more effectively.',
-    href: '/overview',
-    cta: 'Take an Assessment',
-  },
 ];
 
 const icons = [
   <GitGraph key="journey" className="h-6 w-6 text-primary" />,
   <Code key="editor" className="h-6 w-6 text-primary" />,
   <FlaskConical key="analyzer" className="h-6 w-6 text-primary" />,
-  <BrainCircuit key="questions" className="h-6 w-6 text-primary" />,
-  <Target key="goals" className="h-6 w-6 text-primary" />,
-  <BrainCircuit key="assessments" className="h-6 w-6 text-primary" />,
 ];
 
 export default function LandingPage() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
+
   return (
     <div className="space-y-12">
       <PageHeader
@@ -131,7 +122,38 @@ export default function LandingPage() {
         description="Your all-in-one platform for mastering software engineering skills, from algorithms to system design."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <section>
+        <h2 className="text-2xl font-bold font-headline mb-6 text-center">
+          Explore Our Features
+        </h2>
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
+          opts={{
+            align: 'start',
+            loop: true,
+          }}
+        >
+          <CarouselContent>
+            {features.map((feature, index) => (
+              <CarouselItem
+                key={feature.title}
+                className="md:basis-1/2 lg:basis-1/3"
+              >
+                <div className="p-1 h-full">
+                  <FeatureCard {...feature} icon={icons[index]} />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </section>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8">
         <Card>
           <CardHeader>
             <CardTitle>Top Coding Questions</CardTitle>
@@ -189,21 +211,6 @@ export default function LandingPage() {
           </CardFooter>
         </Card>
       </div>
-
-      <section>
-        <h2 className="text-2xl font-bold font-headline mb-6 text-center">
-          Explore Our Features
-        </h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => (
-            <FeatureCard
-              key={feature.title}
-              {...feature}
-              icon={icons[index]}
-            />
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
