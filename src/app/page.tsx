@@ -108,7 +108,7 @@ export default function LandingPage() {
   return (
     <div className="space-y-12">
       <PageHeader
-        title="Welcome to AdaptiveLearn"
+        title="Welcome to TechCoach"
         description="Your all-in-one platform for mastering software engineering skills, from algorithms to system design."
       />
 

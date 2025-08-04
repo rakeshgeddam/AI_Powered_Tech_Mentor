@@ -88,7 +88,7 @@ export function AppHeader() {
               </svg>
             </div>
             <span className="text-lg font-bold font-headline">
-              AdaptiveLearn
+              TechCoach
             </span>
           </Link>
         </div>
@@ -130,7 +130,7 @@ export function AppHeader() {
                         <path d="m14.5 10.5-4 4L9 13"></path>
                       </svg>
                     </div>
-                    AdaptiveLearn
+                    TechCoach
                   </Link>
                   <nav className="grid gap-2 px-2">{mobileNavLinks}</nav>
                 </div>
