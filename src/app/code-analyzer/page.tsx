@@ -2,13 +2,9 @@
 
 import { useState } from 'react';
 import MonacoEditor from '@monaco-editor/react';
-import { PageHeader } from '@/components/layout/page-header';
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,8 +19,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
-import { Bot, FlaskConical, Send } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const languages = [
   { value: 'javascript', label: 'JavaScript' },
@@ -105,100 +100,126 @@ func twoSum(nums []int, target int) []int {
 }`,
 };
 
+const FeedbackBubble = ({
+  avatar,
+  name,
+  feedback,
+}: {
+  avatar: React.ReactNode;
+  name: string;
+  feedback: string;
+}) => (
+  <Card className="shadow-sm">
+    <CardContent className="p-4">
+      <div className="flex items-start gap-4">
+        {avatar}
+        <div className="flex-1">
+          <p className="font-semibold text-card-foreground">{name}</p>
+          <div className="mt-2 bg-muted text-muted-foreground p-3 rounded-lg text-sm">
+            {feedback}
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
+
 export default function CodeAnalyzerPage() {
-  const [language, setLanguage] = useState('javascript');
-  const [code, setCode] = useState(placeholderCode['javascript']);
+  const [language, setLanguage] = useState('python');
+  const [code, setCode] = useState(placeholderCode['python']);
+  const [teamLeadFeedback, setTeamLeadFeedback] = useState(
+    'Your feedback from the Team Lead will appear here...'
+  );
+  const [managerFeedback, setManagerFeedback] = useState(
+    'Your feedback from the Manager will appear here...'
+  );
 
   const handleLanguageChange = (lang: string) => {
     setLanguage(lang);
     setCode(placeholderCode[lang] || '');
   };
 
+  const handleAnalyze = () => {
+    // This is where you'd call your Hugging Face backend
+    setTeamLeadFeedback('Analyzing code for readability issues...');
+    setManagerFeedback('Analyzing code for design patterns...');
+
+    // Simulate API call
+    setTimeout(() => {
+      setTeamLeadFeedback(
+        'The function `two_sum` has a high cyclomatic complexity. Consider breaking it down.'
+      );
+      setManagerFeedback(
+        'Using a hash map is efficient, but this implementation is not thread-safe. Consider concurrency implications.'
+      );
+    }, 2000);
+  };
+
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col space-y-4">
-      <PageHeader
-        title="AI Code Analyzer"
-        description="Get instant feedback on code quality, efficiency, and potential issues."
-      />
+    <div className="h-[calc(100vh-6rem)] w-full">
       <ResizablePanelGroup
         direction="horizontal"
-        className="flex-1 rounded-lg border"
+        className="h-full w-full rounded-lg border"
       >
-        <ResizablePanel defaultSize={33}>
-          <div className="flex h-full flex-col p-4">
-            <Card className="h-full flex flex-col">
-              <CardHeader>
-                <CardTitle className="font-headline">Clean Code Scenarios</CardTitle>
-                <CardDescription>
-                  Select a scenario to analyze your code against.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-1">
-                <p className="text-sm text-muted-foreground">
-                  Your clean code scenarios from the backend will appear here.
-                </p>
-              </CardContent>
-            </Card>
+        <ResizablePanel defaultSize={65}>
+          <div className="flex h-full flex-col">
+            <div className="flex items-center justify-between p-2 border-b bg-card">
+              <Select value={language} onValueChange={handleLanguageChange}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select Language" />
+                </SelectTrigger>
+                <SelectContent>
+                  {languages.map((lang) => (
+                    <SelectItem key={lang.value} value={lang.value}>
+                      {lang.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button onClick={handleAnalyze}>Analyze Code</Button>
+            </div>
+            <div className="flex-1">
+              <MonacoEditor
+                height="100%"
+                language={language}
+                theme="vs-dark"
+                value={code}
+                onChange={(value) => setCode(value || '')}
+                options={{ minimap: { enabled: false }, fontSize: 14 }}
+              />
+            </div>
+            <div className="p-4 border-t bg-card text-sm">
+              <h3 className="font-semibold mb-2">Task: Refactor for Clean Code</h3>
+              <p className="text-muted-foreground">
+                Given the code snippet, refactor it to improve readability and adhere to SOLID principles. Your goal is to make the code as clean and maintainable as possible.
+              </p>
+            </div>
           </div>
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={67}>
-          <ResizablePanelGroup direction="vertical">
-            <ResizablePanel defaultSize={70}>
-              <div className="flex h-full flex-col">
-                <div className="flex items-center justify-between p-2 border-b">
-                  <Select
-                    value={language}
-                    onValueChange={handleLanguageChange}
-                  >
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select Language" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {languages.map((lang) => (
-                        <SelectItem key={lang.value} value={lang.value}>
-                          {lang.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Button>
-                    <FlaskConical className="mr-2 h-4 w-4" /> Analyze
-                  </Button>
-                </div>
-                <div className="flex-1">
-                  <MonacoEditor
-                    height="100%"
-                    language={language}
-                    theme="vs-dark"
-                    value={code}
-                    onChange={(value) => setCode(value || '')}
-                    options={{ minimap: { enabled: false }, fontSize: 14 }}
-                  />
-                </div>
-              </div>
-            </ResizablePanel>
-            <ResizableHandle withHandle />
-            <ResizablePanel defaultSize={30} minSize={20}>
-              <div className="h-full flex flex-col p-4">
-                <div className="flex items-center gap-2 mb-4">
-                  <Bot />
-                  <h3 className="text-lg font-semibold font-headline">AI Assistant</h3>
-                </div>
-                <div className="flex-1 space-y-4 overflow-y-auto rounded-md bg-muted/50 p-4">
-                  <div className="text-sm text-muted-foreground">
-                    Ask the assistant for help with the code analysis.
-                  </div>
-                </div>
-                <div className="mt-4 flex items-center gap-2">
-                  <Input placeholder="Ask a follow-up question..." />
-                  <Button variant="ghost" size="icon">
-                    <Send />
-                  </Button>
-                </div>
-              </div>
-            </ResizablePanel>
-          </ResizablePanelGroup>
+        <ResizablePanel defaultSize={35} minSize={25}>
+          <div className="flex h-full flex-col gap-6 p-6 bg-background overflow-y-auto">
+            <FeedbackBubble
+              avatar={
+                <Avatar className="w-16 h-16">
+                  <AvatarImage src="https://placehold.co/128x128.png" data-ai-hint="man glasses" />
+                  <AvatarFallback>TL</AvatarFallback>
+                </Avatar>
+              }
+              name="Team Lead"
+              feedback={teamLeadFeedback}
+            />
+            <FeedbackBubble
+              avatar={
+                <Avatar className="w-16 h-16">
+                  <AvatarImage src="https://placehold.co/128x128.png" data-ai-hint="woman professional" />
+                  <AvatarFallback>M</AvatarFallback>
+                </Avatar>
+              }
+              name="Manager"
+              feedback={managerFeedback}
+            />
+          </div>
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
