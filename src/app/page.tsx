@@ -14,11 +14,14 @@ import {
   FlaskConical,
   GitGraph,
   BrainCircuit,
+  Code,
+  BookOpen,
 } from 'lucide-react';
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import * as React from 'react';
+import Image from 'next/image';
 import {
   Card,
   CardContent,
@@ -77,18 +80,26 @@ const features: Omit<FeatureCardProps, 'icon'>[] = [
     cta: 'Analyze Code',
   },
   {
-    title: 'Cognitive Assessment',
+    title: 'Interactive Code Editor',
     description:
-      'Identify your cognitive strengths and weaknesses with targeted exercises.',
-    href: '/overview',
-    cta: 'Assess Yourself',
+      'Sharpen your problem-solving skills in a real-time coding environment.',
+    href: '/code-editor',
+    cta: 'Start Coding',
+  },
+  {
+    title: 'AI Learning Hub',
+    description:
+      'Explore topics with AI-generated content that adapts to your knowledge level.',
+    href: '/learning-hub',
+    cta: 'Start Learning',
   },
 ];
 
 const icons = [
   <GitGraph key="journey" className="h-8 w-8 text-primary" />,
   <FlaskConical key="analyzer" className="h-8 w-8 text-primary" />,
-  <BrainCircuit key="assessment" className="h-8 w-8 text-primary" />,
+  <Code key="editor" className="h-8 w-8 text-primary" />,
+  <BookOpen key="hub" className="h-8 w-8 text-primary" />,
 ];
 
 export default function LandingPage() {
@@ -99,18 +110,72 @@ export default function LandingPage() {
   return (
     <div className="space-y-12">
       {/* Hero Section */}
-      <section className="text-center">
-        <PageHeader
-          title="Unlock Your Potential."
-          description="Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges."
-        />
-        <div className="mt-8 flex justify-center gap-4">
-          <Button asChild size="lg">
-            <Link href="/overview">Get Started</Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/journey">Explore Features</Link>
-          </Button>
+      <section className="relative overflow-hidden rounded-lg bg-secondary/50 py-20 sm:py-32 lg:py-40">
+        <div className="container mx-auto">
+          <div className="absolute inset-0">
+            <svg
+              className="absolute inset-0 h-full w-full"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+              style={{
+                top: '-10%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '200%',
+                height: '120%',
+                minWidth: '800px',
+              }}
+            >
+              <defs>
+                <radialGradient
+                  id="swoosh-gradient"
+                  cx="50%"
+                  cy="50%"
+                  r="50%"
+                  fx="25%"
+                  fy="25%"
+                >
+                  <stop offset="0%" stopColor="hsl(var(--primary) / 0.1)" />
+                  <stop offset="100%" stopColor="hsl(var(--primary) / 0)" />
+                </radialGradient>
+              </defs>
+              <ellipse
+                cx="50%"
+                cy="40%"
+                rx="60%"
+                ry="50%"
+                fill="url(#swoosh-gradient)"
+                transform="rotate(-15, 50, 50)"
+              />
+            </svg>
+          </div>
+
+          <div className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+            <div className="text-center lg:text-left">
+              <PageHeader
+                title="Unlock Your Potential. Today."
+                description="Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges."
+              />
+              <div className="mt-8 flex justify-center gap-4 lg:justify-start">
+                <Button asChild size="lg">
+                  <Link href="/overview">Start Learning Now</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/journey">Explore Features</Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="relative h-64 w-full lg:h-96">
+              <Image
+                src="https://placehold.co/600x400.png"
+                alt="Students learning with joy"
+                fill
+                className="rounded-xl object-cover shadow-2xl"
+                data-ai-hint="students learning"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
