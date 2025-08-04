@@ -3,14 +3,6 @@
 import { PageHeader } from '@/components/layout/page-header';
 import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -19,18 +11,23 @@ import {
 } from '@/components/ui/carousel';
 import {
   ArrowRight,
-  Code,
   FlaskConical,
   GitGraph,
-  Layers,
   BrainCircuit,
-  Target,
 } from 'lucide-react';
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import * as React from 'react';
 import Image from 'next/image';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 interface FeatureCardProps {
   title: string;
@@ -47,7 +44,7 @@ const FeatureCard: FC<FeatureCardProps> = ({
   href,
   cta,
 }) => (
-  <Card className="flex flex-col h-full text-center items-center">
+  <Card className="flex flex-col h-full text-center items-center border-0 shadow-lg bg-card/80 backdrop-blur-sm">
     <CardHeader>
       <div className="bg-primary/10 p-4 rounded-full">{icon}</div>
     </CardHeader>
@@ -56,7 +53,7 @@ const FeatureCard: FC<FeatureCardProps> = ({
       <CardDescription className="mt-2">{description}</CardDescription>
     </CardContent>
     <CardFooter>
-      <Button asChild variant="outline">
+      <Button asChild variant="secondary">
         <Link href={href}>
           {cta} <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
@@ -101,20 +98,35 @@ export default function LandingPage() {
   );
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-12">
       {/* Hero Section */}
-      <section className="text-center">
-        <PageHeader
-          title="Unlock Your Potential."
-          description="Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges."
-        />
-        <div className="mt-8 flex justify-center gap-4">
-          <Button asChild size="lg">
-            <Link href="/overview">Get Started</Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/journey">Explore Features</Link>
-          </Button>
+      <section className="relative -mx-4 -mt-8 sm:-mx-6 lg:-mx-8">
+        <div className="relative h-[560px] w-full">
+          <Image
+            src="https://storage.googleapis.com/res-block-studio/images/prompts/86c67d30-b30f-48d6-8488-124b82531e32.png"
+            alt="Students learning with joy"
+            layout="fill"
+            objectFit="cover"
+            className="z-0"
+            data-ai-hint="students learning"
+          />
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+          <div className="relative z-20 flex h-full items-center">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
+              <PageHeader
+                title="Unlock Your Potential."
+                description="Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges."
+              />
+              <div className="mt-8 flex justify-start gap-4">
+                <Button asChild size="lg">
+                  <Link href="/overview">Get Started</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="bg-transparent/50 border-primary-foreground/50 hover:bg-transparent/80">
+                  <Link href="/journey">Explore Features</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -128,55 +140,19 @@ export default function LandingPage() {
         >
           <CarouselContent>
             {features.map((feature, index) => (
-              <CarouselItem key={feature.title}>
-                <div className="p-1">
+              <CarouselItem
+                key={feature.title}
+                className="md:basis-1/2 lg:basis-1/3"
+              >
+                <div className="p-1 h-full">
                   <FeatureCard {...feature} icon={icons[index]} />
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="ml-12" />
+          <CarouselNext className="mr-12" />
         </Carousel>
-      </section>
-
-      {/* LLD Questions Section */}
-      <section className="grid grid-cols-1 lg:grid-cols-1 gap-8 pt-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Top LLD Questions</CardTitle>
-            <CardDescription>
-              Practice your low-level system design knowledge.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {[
-                'Design a Parking Lot',
-                'Design a Vending Machine',
-                'Design a Library Management System',
-                'Design a Chess Game',
-                'Design a URL Shortener',
-                'Design a Traffic Control System',
-              ].map((q) => (
-                <li key={q}>
-                  <Link
-                    href={`/code-analyzer?question=${encodeURIComponent(q)}`}
-                    className="flex items-center text-muted-foreground hover:text-primary transition-colors p-2 rounded-md hover:bg-muted/50"
-                  >
-                    <ArrowRight className="mr-2 h-4 w-4 text-primary/70" />
-                    {q}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" className="w-full" asChild>
-              <Link href="/lld-questions">View All LLD Questions</Link>
-            </Button>
-          </CardFooter>
-        </Card>
       </section>
     </div>
   );
