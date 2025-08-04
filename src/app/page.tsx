@@ -20,7 +20,6 @@ import {
 } from '@/components/ui/carousel';
 import {
   ArrowRight,
-  BrainCircuit,
   Code,
   FlaskConical,
   GitGraph,
@@ -29,15 +28,6 @@ import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import * as React from 'react';
-
-// This is a placeholder. In a real app, you'd fetch this from your backend.
-const codingQuestions = [
-  'Two Sum',
-  'Reverse a Linked List',
-  'Valid Palindrome',
-  'Binary Tree Inorder Traversal',
-  'Kth Smallest Element in a BST',
-];
 
 const lldQuestions = [
   'Design a Parking Lot',
@@ -153,35 +143,7 @@ export default function LandingPage() {
         </Carousel>
       </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Top Coding Questions</CardTitle>
-            <CardDescription>
-              Sharpen your algorithm and data structure skills.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {codingQuestions.map((q) => (
-                <li key={q}>
-                  <Link
-                    href={`/code-editor?question=${encodeURIComponent(q)}`}
-                    className="flex items-center text-muted-foreground hover:text-primary transition-colors p-2 rounded-md hover:bg-muted/50"
-                  >
-                    <ArrowRight className="mr-2 h-4 w-4 text-primary/70" />
-                    {q}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" className="w-full" asChild>
-              <Link href="/coding-questions">View All Coding Questions</Link>
-            </Button>
-          </CardFooter>
-        </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 pt-8">
         <Card>
           <CardHeader>
             <CardTitle>Top LLD Questions</CardTitle>
