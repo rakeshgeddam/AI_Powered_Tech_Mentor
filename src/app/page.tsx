@@ -110,7 +110,7 @@ export default function LandingPage() {
   return (
     <div className="space-y-12">
       {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-lg bg-secondary/50 py-24 sm:py-36 lg:py-48">
+      <section className="relative overflow-hidden rounded-lg bg-secondary/50 py-24 sm:py-36 lg:py-48 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto">
           <div className="absolute inset-0">
             <svg
