@@ -29,7 +29,7 @@ const navItems = [
   { href: '/overview', label: 'Overview', icon: Target },
   { href: '/journey', label: 'Journey', icon: GitGraph },
   { href: '/learning-hub', label: 'Learning Hub', icon: BookOpen },
-  { href: '/code-editor', label: 'Code Editor', icon: Code },
+  // { href: '/code-editor', label: 'Code Editor', icon: Code },
   { href: '/code-analyzer', label: 'Code Analyzer', icon: FlaskConical },
 ];
 
