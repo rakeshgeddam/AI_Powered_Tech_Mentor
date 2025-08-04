@@ -103,45 +103,41 @@ export default function LandingPage() {
   return (
     <div className="space-y-20">
       {/* Hero Section */}
-      <section className="relative -mx-8 -mt-8 h-[600px] flex items-center justify-center text-center">
-        <Image
-          src="https://storage.googleapis.com/res-block-studio/images/prompts/89a50893-272e-4e4b-8422-3861c8f18731.png"
-          alt="Students learning with joy"
-          layout="fill"
-          objectFit="cover"
-          className="z-0"
-          priority
+      <section className="text-center">
+        <PageHeader
+          title="Unlock Your Potential."
+          description="Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges."
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10 z-10" />
-        <div className="relative z-20 space-y-6 px-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-headline tracking-tight drop-shadow-lg">
-            Unlock Your Potential.
-          </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md">
-            Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges.
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Button asChild size="lg" className="text-lg">
-              <Link href="/overview">Start Learning Now</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-lg bg-white/10 backdrop-blur-sm border-white/50 text-white hover:bg-white/20 hover:text-white">
-              <Link href="/journey">Explore Features</Link>
-            </Button>
-          </div>
+        <div className="mt-8 flex justify-center gap-4">
+          <Button asChild size="lg">
+            <Link href="/overview">Get Started</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link href="/journey">Explore Features</Link>
+          </Button>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Carousel Section */}
       <section>
-        <div className="text-center space-y-2 mb-12">
-           <h2 className="text-3xl font-bold font-headline">Why TechCoach?</h2>
-           <p className="text-muted-foreground text-lg">Your all-in-one platform for mastering software engineering.</p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
+        >
+          <CarouselContent>
             {features.map((feature, index) => (
-                <FeatureCard key={feature.title} {...feature} icon={icons[index]} />
+              <CarouselItem key={feature.title}>
+                <div className="p-1">
+                  <FeatureCard {...feature} icon={icons[index]} />
+                </div>
+              </CarouselItem>
             ))}
-        </div>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </section>
 
       {/* LLD Questions Section */}
