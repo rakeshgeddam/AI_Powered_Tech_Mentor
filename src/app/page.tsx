@@ -19,7 +19,6 @@ import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import * as React from 'react';
-import Image from 'next/image';
 import {
   Card,
   CardContent,
@@ -100,33 +99,18 @@ export default function LandingPage() {
   return (
     <div className="space-y-12">
       {/* Hero Section */}
-      <section className="relative -mx-4 -mt-8 sm:-mx-6 lg:-mx-8">
-        <div className="relative h-[560px] w-full">
-          <Image
-            src="https://storage.googleapis.com/res-block-studio/images/prompts/86c67d30-b30f-48d6-8488-124b82531e32.png"
-            alt="Students learning with joy"
-            layout="fill"
-            objectFit="cover"
-            className="z-0"
-            data-ai-hint="students learning"
-          />
-          <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-          <div className="relative z-20 flex h-full items-center">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
-              <PageHeader
-                title="Unlock Your Potential."
-                description="Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges."
-              />
-              <div className="mt-8 flex justify-start gap-4">
-                <Button asChild size="lg">
-                  <Link href="/overview">Get Started</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="bg-transparent/50 border-primary-foreground/50 hover:bg-transparent/80">
-                  <Link href="/journey">Explore Features</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
+      <section className="text-center">
+        <PageHeader
+          title="Unlock Your Potential."
+          description="Master in-demand tech skills with personalized learning paths, AI-powered feedback, and real-world challenges."
+        />
+        <div className="mt-8 flex justify-center gap-4">
+          <Button asChild size="lg">
+            <Link href="/overview">Get Started</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link href="/journey">Explore Features</Link>
+          </Button>
         </div>
       </section>
 
