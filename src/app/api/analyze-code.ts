@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { InferenceClient } from '@huggingface/inference'; // Use InferenceClient as suggested by deprecation
 
-const HF_ACCESS_TOKEN = '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' ; // || process.env.HF_API_TOKEN Ensure this environment variable is set
+const HF_ACCESS_TOKEN = 'XXXXXXXXXXXXXXX' ; // || process.env.HF_API_TOKEN Ensure this environment variable is set
 const hf = new InferenceClient(HF_ACCESS_TOKEN);
 
 // System prompts for each role
