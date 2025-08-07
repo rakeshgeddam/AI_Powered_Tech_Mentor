@@ -6,6 +6,12 @@ This project is a personalized coding support platform that combines graph-based
 
 The platform adapts to each individual's cognitive patterns and knowledge gaps, offering an intelligent, structured, and practical approach to mastering technical concepts.
 
+<img width="1703" height="781" alt="image" src="https://github.com/user-attachments/assets/358671c7-84c9-4bd0-89d6-960e7a597b05" />
+
+
+<img width="1663" height="922" alt="image" src="https://github.com/user-attachments/assets/b864ee9b-3d8b-4eb6-8664-9d8b7c9c9734" />
+
+
 ## Tech Stack
 
 - **Frontend:** TypeScript (React or Vue)
@@ -56,6 +62,9 @@ The platform adapts to each individual's cognitive patterns and knowledge gaps, 
 - Highlights and fills knowledge gaps before introducing new topics
 - Progress and knowledge graph are continuously updated in real time
 - Encourages deeper understanding through system design and theory integration
+
+<img width="1757" height="914" alt="image" src="https://github.com/user-attachments/assets/73f23f80-c30d-43b1-ae57-de0ee13b7cb1" />
+
 
 ## Roadmap
 
