@@ -1,4 +1,6 @@
-# **App Name**: AdaptiveLearn
+# **App Name**: AI_Powered_Tech_Mentor
+
+
 
 ## Core Features:
 
@@ -9,11 +11,4 @@
 - Low-level-Code Editor: Interactive code editor with support for multiple languages, Displays code quality analysis, Saves code with latest edit wins, along with question ID.
 - AI-Powered Learning: AI-powered theoretical learning module using HuggingFace API to analyze knowledge graph prerequisites with confidence thresholds, generate content. Will implement the use of multiple tools to allow the AI assistant to have greater range for finding applicable code information.
 
-## Style Guidelines:
-
-- Primary color: Soft sky blue (#87CEEB), conveying intelligence and knowledge.
-- Background color: Light, desaturated blue (#F0F8FF) for a calm and focused learning environment.
-- Accent color: Warm, contrasting orange (#FF7F50) for important actions and highlights to draw attention without being distracting.
-- Headline font: 'Space Grotesk' (sans-serif) for a techy, modern feel; use 'Inter' (sans-serif) for the body.
-- Use clear and simple icons. Each concept/module should have a dedicated icon, supporting the chosen theme. Use the chosen primary and accent colors in the icons.
-- Subtle transitions and animations to guide the user without being distracting.
+<img width="1073" height="417" alt="simplified_flow_diagram" src="https://github.com/user-attachments/assets/6ccef06c-6112-4098-8929-7c293bb3a7e3" />
