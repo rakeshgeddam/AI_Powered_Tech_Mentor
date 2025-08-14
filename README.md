@@ -6,10 +6,6 @@ This project is a personalized coding support platform that combines graph-based
 
 The platform adapts to each individual's cognitive patterns and knowledge gaps, offering an intelligent, structured, and practical approach to mastering technical concepts.
 
-<img width="1703" height="781" alt="image" src="https://github.com/user-attachments/assets/358671c7-84c9-4bd0-89d6-960e7a597b05" />
-
-
-<img width="1663" height="922" alt="image" src="https://github.com/user-attachments/assets/b864ee9b-3d8b-4eb6-8664-9d8b7c9c9734" />
 
 
 ## Tech Stack
@@ -19,6 +15,11 @@ The platform adapts to each individual's cognitive patterns and knowledge gaps, 
 - **Databases:** Neo4j (graph), PostgreSQL (relational)
 - **AI Models:** Gemini 2.5 Flash, Qwen 30B (via HuggingFace)
 - **Infrastructure:** Docker, AWS/GCP, WebSocket for real-time interaction
+
+<img width="3840" height="3485" alt="mermaid-ai-diagram-2025-08-14-135408" src="https://github.com/user-attachments/assets/2f8f0418-7872-488f-9a2a-fe41e9eaa6c5" />
+
+
+
 
 ## Core Features
 
@@ -38,6 +39,11 @@ The platform adapts to each individual's cognitive patterns and knowledge gaps, 
 - Real-time prerequisite analysis and concept mastery tracking
 - Algorithms for personalized learning path recommendations
 
+
+<img width="1073" height="417" alt="simplified_flow_diagram" src="https://github.com/user-attachments/assets/03c9c1e6-4fcb-4dec-add3-031281e8ef13" />
+
+
+
 ### Interactive Coding Environment
 
 - In-browser code editor with support for Python, JavaScript, Java, C++, and Go
@@ -49,6 +55,8 @@ The platform adapts to each individual's cognitive patterns and knowledge gaps, 
 - Visual system architecture tools with drag-and-drop components
 - Design prompts with peer feedback support
 - Scenarios covering scalability, fault tolerance, and database design
+
+<img width="1663" height="922" alt="image" src="https://github.com/user-attachments/assets/b864ee9b-3d8b-4eb6-8664-9d8b7c9c9734" />
 
 ### AI-Powered Concept Learning
 
@@ -79,6 +87,8 @@ Mobile support, collaboration features, advanced analytics, and personalized ins
 
 **Phase 4:**  
 Performance optimization, enterprise onboarding, multi-modal content, and certification modules.
+
+<img width="1703" height="781" alt="image" src="https://github.com/user-attachments/assets/358671c7-84c9-4bd0-89d6-960e7a597b05" />
 
 ## Key Metrics
 
