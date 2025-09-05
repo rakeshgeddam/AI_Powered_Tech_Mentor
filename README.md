@@ -16,7 +16,7 @@ The platform adapts to each individual's cognitive patterns and knowledge gaps, 
 - **AI Models:** Gemini 2.5 Flash, Qwen 30B (via HuggingFace)
 - **Infrastructure:** Docker, AWS/GCP, WebSocket for real-time interaction
 
-<img width="1840" height="1485" alt="mermaid-ai-diagram-2025-08-14-135408" src="https://github.com/user-attachments/assets/2f8f0418-7872-488f-9a2a-fe41e9eaa6c5" />
+<img width="540" height="545" alt="mermaid-ai-diagram-2025-08-14-135408" src="https://github.com/user-attachments/assets/2f8f0418-7872-488f-9a2a-fe41e9eaa6c5" />
 
 
 
